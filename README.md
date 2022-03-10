@@ -1,2 +1,2 @@
-# PHP-Post-project-output
+# PHP-POST-Project-output
 ![](image.png)
