@@ -3,12 +3,19 @@
 $name = $website = $position = $experience = $estatus = $comments = "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-  $name = val($_POST['name']);
-  $website = val($_POST['website']);
-  $position = val($_POST['position']);
-  $experience = val($_POST['experience']);
-  $estatus = val($_POST['estatus']);
-  $comments = val($_POST['comments']);
+
+  if (empty($_POST["name"])) {
+    echo "<span class=\"error\">Error:First name required</span>";
+  } elseif (empty($_POST["website"])) {
+    echo "<span class=\"error\">Error: Website required</span>";
+  } else {
+    $name = val($_POST['name']);
+    $website = val($_POST['website']);
+    $position = val($_POST['position']);
+    $experience = val($_POST['experience']);
+    $estatus = val($_POST['estatus']);
+    $comments = val($_POST['comments']);
+  }
 }
 
 function val($data)
@@ -58,11 +65,11 @@ function val($data)
           </tr>
           <tr>
             <td>Name</td>
-            <td><input class="mb-3" type="text" name="name" maxlength="50" style="width:100%; border:none;" required /></td>
+            <td><input class="mb-3" type="text" name="name" id="name" maxlength="50" style="width:100%; border:none;" /></td>
           </tr>
           <tr>
             <td>Website</td>
-            <td><input class="mb-3" type="text" name="website" maxlength="50" style="width:100%; border:none;" /></td>
+            <td><input class="mb-3" type="text" name="website" id="website" maxlength="50" style="width:100%; border:none;" /></td>
           </tr>
           <tr>
             <td>Position</td>
@@ -162,16 +169,23 @@ function val($data)
 
   <script>
     function submit() {
-      alert("Data has been submitted successfully!");
+      var name = document.getElementById("name").value;
+      var website = document.getElementById("website").value;
+      if (name != "" && website != "") {
+        alert("Data has been submitted successfully!");
+      }
+
+
     }
 
     function remove() {
       alert("All details have been removed!");
     }
-    document.addEventListener("contextmenu", (evt) => {
-      evt.preventDefault();
-    }, false);
+    // document.addEventListener("contextmenu", (evt) => {
+    //   evt.preventDefault();
+    // }, false);
   </script>
 
 </body>
+
 </html>
